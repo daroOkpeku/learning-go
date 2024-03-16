@@ -24,18 +24,6 @@ func SayBye(n string) {
 	fmt.Printf("Good Bye %v \n", n)
 }
 
-//if the code is like this to update string, number, array and boolean it will not update the original copy and it will just make
-// another copy
-// func Updatestr(xs string) {
-// 	xs = "stories"
-
-// }
-func Updatestr(xs string) string {
-	// this is how update the original copy
-	xs = "stories"
-	return xs
-}
-
 func Pass(arr []string, f func(string)) {
 	// you can pass in array and function in go as a parameter
 	for _, value := range arr {
@@ -68,6 +56,25 @@ func multistr(namesmany string) (string, string) {
 		return "_", "_"
 	}
 
+}
+
+//if the code is like this to update string, number, array and boolean it will not update the original copy and it will just make
+// another copy
+// func Updatestr(xs string) {
+// 	xs = "stories"
+
+// }
+func Updatestr(xs string) string {
+	// this is how update the original copy
+	xs = "stories"
+	return xs
+}
+
+func Updatemap(upda map[string]float32) {
+	// this will add new key and value to the map
+	// because it does not exist in the object
+	// if the key exist in the map it will update the map
+	upda["fouth"] = 40.98
 }
 
 func main() {
@@ -296,4 +303,14 @@ func main() {
 	zenx = Updatestr(zenx)
 	fmt.Println(zenx)
 
+	// updating maps in go
+
+	var numfloat = map[string]float32{
+		"first":  30.4,
+		"second": 20.55,
+		"third":  50.89,
+	}
+
+	Updatemap(numfloat)
+	fmt.Println(numfloat)
 }
