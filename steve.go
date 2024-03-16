@@ -24,6 +24,18 @@ func SayBye(n string) {
 	fmt.Printf("Good Bye %v \n", n)
 }
 
+//if the code is like this to update string, number, array and boolean it will not update the original copy and it will just make
+// another copy
+// func Updatestr(xs string) {
+// 	xs = "stories"
+
+// }
+func Updatestr(xs string) string {
+	// this is how update the original copy
+	xs = "stories"
+	return xs
+}
+
 func Pass(arr []string, f func(string)) {
 	// you can pass in array and function in go as a parameter
 	for _, value := range arr {
@@ -274,5 +286,14 @@ func main() {
 	}
 
 	fmt.Println(objtest)
+
+	// this is how to update a value in a map
+	objtest["cows"] = 4
+	fmt.Println(objtest)
+
+	var zenx = "zenstream"
+	//  if  zenx = Updatestr(zenx) it will update the original copy
+	zenx = Updatestr(zenx)
+	fmt.Println(zenx)
 
 }
