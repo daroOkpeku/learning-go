@@ -74,6 +74,7 @@ func Updatemap(upda map[string]float32) {
 	// this will add new key and value to the map
 	// because it does not exist in the object
 	// if the key exist in the map it will update the map
+	// it also point to the original copy that you are able to upadte it
 	upda["fouth"] = 40.98
 }
 
