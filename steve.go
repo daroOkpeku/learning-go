@@ -3,6 +3,7 @@ package main
 // go packages documentation url https://pkg.go.dev/std
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strings"
 )
@@ -14,6 +15,48 @@ var nickname = "jason"
 var nicknamex string = "reacher"
 
 var d int = 987990
+
+func SayGreeting(n string) {
+	fmt.Printf("Good Mornig %v \n", n)
+}
+
+func SayBye(n string) {
+	fmt.Printf("Good Bye %v \n", n)
+}
+
+func Pass(arr []string, f func(string)) {
+	// you can pass in array and function in go as a parameter
+	for _, value := range arr {
+		// this function is the on that console it to the terminal
+		f(value)
+	}
+}
+
+// func demc(num1 float32)  float32{} the float after barcket is to know what type of data type you are returning
+func demc(num1 float32) float32 {
+	var ansone = math.Pi * num1 * num1
+	return ansone
+}
+
+// this function is for passing multiple string the same can be done for numbers
+func multistr(namesmany string) (string, string) {
+	var ansnamesmany = strings.ToUpper(namesmany)
+	arransnamesmany := strings.Split(ansnamesmany, " ")
+
+	var initialize []string
+	for _, value := range arransnamesmany {
+		initialize = append(initialize, value[:1])
+	}
+
+	if len(initialize) > 1 {
+		return initialize[0], initialize[1]
+	} else if len(initialize) == 1 {
+		return initialize[0], "_"
+	} else {
+		return "_", "_"
+	}
+
+}
 
 func main() {
 	// this is how to declear a string in go and in go you only use double quot for string
@@ -179,7 +222,57 @@ func main() {
 	// }
 
 	// if i do not want to display this index or value use _
-	for _, value := range wordsarrloop {
-		fmt.Printf("the   word %v \n", value)
+	// for _, value := range wordsarrloop {
+	// 	fmt.Printf("the   word %v \n", value)
+	// }
+
+	// condition statment and boolean
+	// agex := 40
+	// fmt.Println(agex <= 50)
+	// fmt.Println(agex >= 50)
+	// fmt.Println(agex == 40)
+	// fmt.Println(agex != 50)
+
+	// for index, value := range wordsarrloop {
+	// 	if index == 1 {
+	// 		fmt.Printf("the value is %v and  %v is the word \n", index, value)
+	// 		continue
+	// 	}
+	// 	if index > 2 {
+	// 		fmt.Printf("you are in %v", index)
+	// 		break
+	// 	}
+	// 	fmt.Printf("your index is %v \n", index)
+	// }
+
+	// function in Go
+	SayGreeting("Stephen")
+	SayBye("Stephen")
+	// the first parametre is a an array and the second is a function
+	Pass(wordsarrloop, SayGreeting)
+	a1 := demc(10.5)
+	fmt.Printf("%0.1f \n", a1)
+	// this is because i returning multiple variable first represeent the first variable been returned and the second  represeent the second variable been returned
+	first, second := multistr("okpeku stephen")
+	fmt.Println(first, second)
+
+	// using function from another go file
+	// and to console the function in the terminal you to write go run steve.go okpeku.go
+	SayHello("solomn")
+
+	for _, value := range fog {
+		SayHello(value)
 	}
+
+	// maps in go have a key and a value it is just like an array and the keys and values can either be a string or value
+	// and maps can be looped through like an array
+	// map[string]int the string inside here [string] means the keys will be string and int mean the value will be numbers
+	var objtest = map[string]int{
+		"name": 1,
+		"cows": 2,
+		"dogs": 3,
+	}
+
+	fmt.Println(objtest)
+
 }
