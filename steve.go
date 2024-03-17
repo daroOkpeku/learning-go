@@ -78,6 +78,12 @@ func Updatemap(upda map[string]float32) {
 	upda["fouth"] = 40.98
 }
 
+func Updatenameuse(x *string) {
+	// if you are using pointer the variable should be *variabletype  that is *string
+	*x = "john"
+	// and the parametre should be add * before the variable that is *x
+}
+
 func main() {
 	// this is how to declear a string in go and in go you only use double quot for string
 	// and it a variable is decleard like this name string you can only assign to it
@@ -305,13 +311,25 @@ func main() {
 	fmt.Println(zenx)
 
 	// updating maps in go
+	// var numfloat = map[string]float32{
+	// 	"first":  30.4,
+	// 	"second": 20.55,
+	// 	"third":  50.89,
+	// }
 
-	var numfloat = map[string]float32{
-		"first":  30.4,
-		"second": 20.55,
-		"third":  50.89,
-	}
+	// Updatemap(numfloat)
+	// fmt.Println(numfloat)
 
-	Updatemap(numfloat)
-	fmt.Println(numfloat)
+	// pointer in go
+	nameuser := "Zack"
+	// &nameuser & is the pointer when you console.log variable it will show the reference of original variable
+	ansnameuser := &nameuser
+	Updatenameuse(ansnameuser)
+	// it will show the updated variable here
+	fmt.Println(nameuser)
+
+	billx := createBill("stephen")
+	ansbillx := billx.format()
+	fmt.Println(ansbillx)
+
 }
