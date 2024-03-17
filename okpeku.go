@@ -17,7 +17,7 @@ type bill struct {
 	// this is the structure of struct that can take map which as object, array and string
 	name string
 	item map[string]float32
-	tag  float32
+	tip  float32
 }
 
 func createBill(name string) bill {
@@ -25,7 +25,7 @@ func createBill(name string) bill {
 	b := bill{
 		name: name,
 		item: map[string]float32{"rice": 30.00, "bean": 20.3, "corn": 45.6},
-		tag:  0,
+		tip:  0,
 	}
 	return b
 }
@@ -43,8 +43,16 @@ func (b bill) format() string {
 		fs += fmt.Sprintf("%v and price:%0.1f \n", index, value)
 		total += value
 	}
-
+	fs += fmt.Sprintf("tip %-7v :%0.1f  \n", " ", b.tip)
 	fs += fmt.Sprintf("total %-7v :%0.1f  \n", " ", total)
 
 	return fs
+}
+
+func (b bill) updateItems(index string, value float32) {
+	b.item[index] = value
+}
+
+func (b bill) updateTip(value float32) {
+	b.tip = value
 }
