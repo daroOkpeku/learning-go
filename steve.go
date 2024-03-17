@@ -329,6 +329,8 @@ func main() {
 	fmt.Println(nameuser)
 
 	billx := createBill("stephen")
+	billx.updateTip(10)
+	billx.AddItems("meat", 20.3)
 	ansbillx := billx.format()
 	fmt.Println(ansbillx)
 
