@@ -168,10 +168,10 @@ type shape interface {
 	circum() float64
 }
 
-// func printSolu(s shape) {
-// 	fmt.Printf("here is the area %0.1f \n", s.area())
-// 	fmt.Printf("here is the circum %0.1f \n", s.circum())
-// }
+func printSolu(s shape) {
+	fmt.Printf("here is the area %0.1f \n", s.area())
+	fmt.Printf("here is the circum %0.1f \n", s.circum())
+}
 
 func main() {
 	// this is how to declear a string in go and in go you only use double quot for string
@@ -432,14 +432,12 @@ func main() {
 	// optionalSelect(billx)
 
 	// interface
-
 	shapes := []shape{
 		circle{radius: 5},
 		square{length: 4},
 	}
 
 	for _, value := range shapes {
-		fmt.Printf("Here is the area: %0.1f\n", value.area())
-		fmt.Printf("Here is the circum: %0.1f\n", value.circum())
+		printSolu(value)
 	}
 }
