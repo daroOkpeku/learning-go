@@ -5,6 +5,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 func SayHello(hello string) {
@@ -20,6 +21,15 @@ type bill struct {
 	tip  float32
 }
 
+func createBillEmpty() bill {
+	// this function will be used to create new struct that are array with object
+	b := bill{
+		name: "",
+		item: map[string]float32{},
+		tip:  0,
+	}
+	return b
+}
 func createBill(name string) bill {
 	// this function will be used to create new struct that are array with object
 	b := bill{
@@ -65,4 +75,10 @@ func (b *bill) updateTip(value float32) {
 
 func (b *bill) addItem() {
 
+}
+
+func (b *bill) saveFile() {
+	// this is how to save struct in a txt file
+	data := []byte(b.format())
+	os.WriteFile("bill"+b.name+".txt", data, 0644)
 }

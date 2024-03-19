@@ -2,9 +2,12 @@ package main
 
 // go packages documentation url https://pkg.go.dev/std
 import (
+	"bufio"
 	"fmt"
 	"math"
+	"os"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -83,6 +86,92 @@ func Updatenameuse(x *string) {
 	*x = "john"
 	// and the parametre should be add * before the variable that is *x
 }
+func multiword(prompt string, r *bufio.Reader) (string, error) {
+	fmt.Print(prompt)
+	name, err := r.ReadString('\n')
+	return strings.TrimSpace(name), err
+}
+func createInput() bill {
+	// this listen to the input source bufio.NewReader and os.Stdin the get the user input from the terminal
+	var reader = bufio.NewReader(os.Stdin)
+	//  this  fmt.Print("please enter the name ") display  please enter  name  in the terminal
+	// fmt.Print("please enter  name")
+	//  reader.ReadString this returb to variable the input and error
+	// name, _ := reader.ReadString('\n')
+	// name = strings.TrimSpace(name)
+	name, _ := multiword("please enter  name", reader)
+	var ansname = createBill(name)
+	return ansname
+}
+
+func optionalSelect(b bill) {
+	reader := bufio.NewReader(os.Stdin)
+	opt, _ := multiword("please select any option s is for save, a is to add to item, t is to add tip", reader)
+	switch opt {
+	case "t":
+		name, _ := multiword("name is", reader)
+		price, _ := multiword("price is", reader)
+		// convert the string number to float32 or float64
+		// strconv.ParseFloat() this method is used to convert string to float
+		p, err := strconv.ParseFloat(price, 32)
+		if err != nil {
+			fmt.Printf("please enter a number %v \n", err)
+			optionalSelect(b)
+		}
+		p32 := float32(p)
+		b.AddItems(name, p32)
+		optionalSelect(b)
+	case "a":
+		tips, _ := multiword("tip is", reader)
+		t, err := strconv.ParseFloat(tips, 32)
+		if err != nil {
+			fmt.Printf("please enter a number %v \n", err)
+			optionalSelect(b)
+		}
+		t32 := float32(t)
+		b.updateTip(t32)
+		optionalSelect(b)
+	case "s":
+		b.saveFile()
+		fmt.Println("you selected s", b)
+	default:
+		optionalSelect(b)
+	}
+}
+
+type circle struct {
+	radius float64
+}
+
+type square struct {
+	length float64
+}
+
+func (s circle) area() float64 {
+	return s.radius * s.radius * math.Pi
+}
+
+func (s circle) circum() float64 {
+	return s.radius * 2 * math.Pi
+}
+
+func (s square) area() float64 {
+	return s.length * s.length
+}
+
+func (s square) circum() float64 {
+	return s.length * 4
+}
+
+type shape interface {
+	area() float64
+	circum() float64
+}
+
+// func printSolu(s shape) {
+// 	fmt.Printf("here is the area %0.1f \n", s.area())
+// 	fmt.Printf("here is the circum %0.1f \n", s.circum())
+// }
 
 func main() {
 	// this is how to declear a string in go and in go you only use double quot for string
@@ -328,10 +417,29 @@ func main() {
 	// it will show the updated variable here
 	fmt.Println(nameuser)
 
-	billx := createBill("stephen")
-	billx.updateTip(10)
-	billx.AddItems("meat", 20.3)
-	ansbillx := billx.format()
-	fmt.Println(ansbillx)
+	// billx := createBill("stephen")
+	// billx.updateTip(10)
+	// billx.AddItems("meat", 20.3)
+	// ansbillx := billx.format()
+	// fmt.Println(ansbillx)
 
+	// listening user input
+	// userinput := createInput()
+	// fmt.Println(userinput)
+
+	//switch statement and listening to user input
+	// billx := createBillEmpty()
+	// optionalSelect(billx)
+
+	// interface
+
+	shapes := []shape{
+		circle{radius: 5},
+		square{length: 4},
+	}
+
+	for _, value := range shapes {
+		fmt.Printf("Here is the area: %0.1f\n", value.area())
+		fmt.Printf("Here is the circum: %0.1f\n", value.circum())
+	}
 }
